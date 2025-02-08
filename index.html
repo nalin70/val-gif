@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffccff;
+            font-family: 'Great Vibes', cursive;
+            margin: 0;
+            position: relative;
+        }
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #ff66b2;
+            margin-bottom: 20px;
+            font-size: 36px;
+        }
+        button {
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #ff3385;
+        }
+        .balloons {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background: url('https://i.imgur.com/4M7IWwP.gif') center center no-repeat; */
+            background-size: cover;
+            animation: fadeIn 2s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .message {
+            display: none;
+            font-size: 20px;
+            color: #ff66b2;
+            margin-top: 20px;
+            animation: popUp 1s forwards;
+        }
+        @keyframes popUp {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        .final-message {
+            display: none;
+            text-align: center;
+        }
+        .final-message img {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .hearts::before, .hearts::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            /* background: url('https://i.imgur.com/4M7IWwP.gif') center center no-repeat; */
+            background-size: cover;
+            animation: fadeIn 2s forwards;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #ff3385;
+            opacity: 0.7;
+        }
+        .watermark a {
+            color: #ff3385;
+            text-decoration: none;
+        }
+        .watermark a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="container" id="questionPanel">
+        <h1>Will you be my Valentine?</h1>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+        <div class="message" id="message">I knew it! You are a cutie!</div>
+    </div>
+    <div class="balloons" id="balloons"></div>
+    <div class="final-message" id="finalMessage">
+        <h1>I knew you would say yes!</h1>
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXFvbmVlY2ZnZmFobGgxbWtycXZ5YTMxNHA2cGI0Z3k0eHh5YjQxcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/enrq327a3sMIJAS5jA/giphy.gif" alt="Cute Gif">
+    </div>
+    <div class="watermark">by <a href="https://portfolio-nalin.netlify.app/" target="_blank">Nalin</a></div>
+    <script>
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            document.getElementById('questionPanel').style.display = 'none';
+            document.getElementById('finalMessage').style.display = 'block';
+            document.getElementById('balloons').style.display = 'block';
+        });
+
+        const phrases = [
+            "Are you sure?",
+            "Really?",
+            "Think again!",
+            "You might regret this!",
+            "Please reconsider!",
+            "Don't say no!",
+            "Give it another thought!",
+            "Are you absolutely sure?",
+            "This is your last chance!",
+            "You can't be serious!",
+            "Just say yes!",
+            "Come on, don't be shy!",
+            "You know you want to!",
+            "Don't break my heart!",
+            "Say yes, please!"
+        ];
+        let index = 0;
+        document.getElementById('noBtn').addEventListener('click', function() {
+            document.getElementById('noBtn').innerText = phrases[index];
+            index = (index + 1) % phrases.length;
+
+            const yesBtn = document.getElementById('yesBtn');
+            const currentSize = parseInt(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 4) + 'px';
+            yesBtn.style.padding = (parseInt(window.getComputedStyle(yesBtn).paddingTop) + 4) + 'px ' + (parseInt(window.getComputedStyle(yesBtn).paddingLeft) + 8) + 'px';
+        });
+    </script>
+</body>
+</html>
